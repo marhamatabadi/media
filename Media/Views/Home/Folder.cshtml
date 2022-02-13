@@ -16,11 +16,13 @@
         @foreach (var item in Model.Childs)
         {
             <div class="col-2">
+                <svg style="height:20px;vertical-align:top;margin:5px;" onclick="onFolderClicked(this,@item.Id,'@item.Title')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z" /></svg>
                 <a asp-action="folder" asp-route-folderId="@item.Id">
                     <i class="fas fa-folder-open" style="font-size:140px;color:#ffe9a0"></i>
                 </a>
                 <br>
-                <span class="text">@item.Title</span>
+                <span class="text" id="span-title_@item.Id">@item.Title</span>
+                <input type="text" class="d-none rename-folder" id="input-title_@item.Id" data-folderid="@item.Id">
             </div>
         }
     </div>

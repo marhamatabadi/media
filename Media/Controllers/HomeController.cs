@@ -16,7 +16,7 @@ namespace Media.Controllers
         {
             _logger = logger;
             _db = db;
-
+            // string x = $"{nameof(ApplicationDbContext)}";
         }
 
         public IActionResult Index()
@@ -78,6 +78,24 @@ namespace Media.Controllers
         }
 
 
+        [HttpPost]
+        public IActionResult RenameFolder(string folderTitle, int folderId)
+        {
+            var folders = _db.Folders.Where(x => x.Title == folderTitle).ToList();
+            foreach (var item in folders)
+            {
+                if (item.Title == folderTitle)
+                {
+                    return Json(new { isSuccess = false, message = "Title used by another folder!" });
+                }
+            }
+            var folder = _db.Folders.FirstOrDefault(x => x.Id == folderId);
+            folder.Title = folderTitle;
+            var saveResult = _db.SaveChanges();
+            if (saveResult > 0)
+                return Json(new { isSuccess = true, message = "Successfully changed" });
+            return Json(new { isSuccess = false, message = "Error in saveing change happend!" });
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
