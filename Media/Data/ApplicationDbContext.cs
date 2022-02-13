@@ -19,6 +19,10 @@ namespace Media.Data
                 x.Property(p => p.Format).HasMaxLength(10);
                 x.HasIndex(p => p.Format);
             });
+            builder.Entity<Folder>(x =>
+            {
+                x.HasIndex(p => new { p.ParentId, p.Title }).IsUnique();
+            });
         }
 
         public DbSet<Media.Models.Entity.File> Files { get; set; }

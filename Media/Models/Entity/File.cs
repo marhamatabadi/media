@@ -32,13 +32,12 @@ namespace Media.Models.Entity
         [Required(ErrorMessage ="ورود عنوان الزامی است")]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "ورود {0} الزامی است")]
-        [Display(Name ="توضیحات")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public DateTime CreateAt { get; set; }
         public Guid CreatorId { get; set; }
         public int? ParentId { get; set; }
         public virtual Folder? Parent { get; set; }
+        public virtual ICollection<Folder>? Childs { get; set; }
         public virtual List<File>? Files { get; set; }
     }
 }

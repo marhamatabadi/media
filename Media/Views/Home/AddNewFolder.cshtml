@@ -1,4 +1,7 @@
 ﻿@model Folder
+@{
+    var parentId = (int?)ViewBag.ParentId;
+}
 <div class="row">
     <div class="col-lg-4 col-md-6 col-sm-12 offset-lg-2 offset-md-1 offset-sm-0">
         <h3 class="text text-primary">Add New Folder</h3>
@@ -7,6 +10,7 @@
 </div>
 <div class="row">
     <form asp-action="AddNewFolder" asp-antiforgery="true" class="col-lg-4 col-md-6 col-sm-12 offset-lg-2 offset-md-1 offset-sm-0">
+        <input type="hidden" value="@parentId" name="parentId" />
         <div class="text text-danger">
             <div asp-validation-summary=All></div>
         </div>
@@ -30,7 +34,6 @@
                 <input type="text" asp-for="Description" class="form-control" aria-label="Description" aria-describedby="inputGroup-sizing-sm">
 
             </div>
-            <span asp-validation-for="Description" class="text-danger"></span>
         </div>
 
         <div class="col form-group  p-1 my-2">
